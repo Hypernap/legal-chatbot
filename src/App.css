@@ -1,38 +1,151 @@
-.App {
-  text-align: center;
+/* styles.css */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html, body, #root {
+  height: 100%;
+  width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1f1f1f; /* Darker background for contrast */
+  color: #eaeaea; /* Light text for readability */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.chatbot-container {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.chat-header {
+  background-color: #383838; /* Slightly darker header */
+  padding: 20px;
+  text-align: center;
+  color: #ff9e64; /* Accent color for header text */
+}
+
+.chat-body {
+  flex-grow: 1;
+  height: calc(100% - 140px); /* Adjust the value based on your header and footer heights */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.message {
+  padding: 8px 12px;
+  border-radius: 12px; /* Slightly rounder corners */
+  max-width: 70%;
+  line-height: 1.6; /* Increased line height for better readability */
+}
+
+.user {
+  align-self: flex-end;
+  background-color: #555; /* Darker user message background */
+  color: #eaeaea; /* Light text for user message */
+}
+
+.bot {
+  align-self: flex-start;
+  background-color: #444; /* Darker bot message background */
+  color: #eaeaea; /* Light text for bot message */
+}
+
+.user:hover,
+.bot:hover,
+.send-btn:hover,
+.chat-footer button:hover {
+  background-color: #666; /* Darken background color on hover */
+  cursor: pointer;
+}
+
+.chat-input {
+  display: flex;
+  background-color: #1f1f1f; /* Darker input background */
+  padding: 15px; /* Adjusted padding */
+  border-top: 1px solid #5c5f6e;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 12px; /* Slightly rounder input corners */
+  margin: 0 auto;
+}
+
+.chat-input input {
+  flex-grow: 1;
+  padding: 8px;
+  background-color: #292929; /* Slightly darker input field */
+  border: none;
+  border-radius: 12px; /* Slightly rounder input field */
+  color: #eaeaea; /* Light text for input */
+}
+
+.chat-input .send-btn {
+  margin-left: 10px;
+  background-color: #ff9e64;
+  border: none;
+  border-radius: 12px; /* Slightly rounder button */
+  color: #000000;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.chat-footer {
+  background-color: #383838; /* Same as chat-body background */
+  padding: 20px;
+  text-align: center;
+  color: #ff9e64; /* Accent color for footer text */
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+}
+
+.chat-footer button {
+  background-color: #ff9e64;
+  border: none;
+  border-radius: 12px; /* Slightly rounder button */
+  color: #000000;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.loading {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.App-link {
-  color: #61dafb;
+.loading img {
+  width: 50px; /* Adjust the width as needed */
+  height: 50px; /* Adjust the height as needed */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+
+@media (max-width: 768px) {
+  .chat-input {
+    width: 80%;
   }
 }
