@@ -48,7 +48,7 @@ Please note that the Groq API for LLaMa-3 has a daily limit for free usage. Once
 ## Video Example
 
 You can watch a video example of the chatbot in action
-<iframe width="560" height="315" src="[https://www.youtube.com/embed/V1BDQK1lzDM](https://www.youtube.com/watch?v=V1BDQK1lzDM)" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/V1BDQK1lzDM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 ## Contributing
