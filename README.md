@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# Legal Chatbot with Groq API for LLaMa-3
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This project is a legal chatbot built using Groq API for LLaMa-3, implemented in React with a simple user interface. The chatbot is designed to provide legal assistance and answer common legal questions using state-of-the-art language models.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Natural Language Understanding**: The chatbot understands natural language queries and provides accurate responses.
+- **Legal Expertise**: Powered by Groq API for LLaMa-3, the chatbot provides reliable legal information and guidance.
+- **React UI**: The user interface is built using React, providing a smooth and intuitive experience for users.
+- **Simple Interface**: The UI is designed to be minimalistic and easy to use, allowing users to interact with the chatbot effortlessly.
+- **Prompt Fine-Tuning**: The chatbot has been fine-tuned to respond in a specified format and content, ensuring consistent and relevant answers.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Clone the repository:
+```bash
+git clone https://github.com/Hypernap/legal-chatbot.git
+```
 
-### `npm test`
+2. Navigate to the project directory:
+```bash
+cd legal-chatbot
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Install dependencies:
+```bash
+npm install
+```
 
-### `npm run build`
+4. Start the development server
+```bash
+npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. Open your browser and navigate to http://localhost:3000 to use the chatbot.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Usage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Enter your legal query in the chatbot input field.
+2. Press Enter or click on the send button to submit your query.
+3. The chatbot will process your query and provide a response.
+4. Interact with the chatbot to ask follow-up questions or seek additional information.
 
-### `npm run eject`
+Please note that the Groq API for LLaMa-3 has a daily limit for free usage. Once the daily limit is reached, you may need to wait until the next day to continue using the chatbot.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Video Example
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You can watch a video example of the chatbot in action
+<iframe width="560" height="315" src="[https://www.youtube.com/embed/V1BDQK1lzDM](https://www.youtube.com/watch?v=V1BDQK1lzDM)" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Contributing
 
-## Learn More
+Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix: `git checkout -b feature-name`.
+3. Make your changes and commit them: `git commit -m 'Add new feature'`.
+4. Push to the branch: `git push origin feature-name`.
+5. Submit a pull request with a detailed explanation of your changes.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Acknowledgements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Groq API for LLaMa-3: [Link](https://www.groq.com/)
+- React: [Link](https://reactjs.org/)
