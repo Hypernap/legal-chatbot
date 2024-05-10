@@ -48,7 +48,7 @@ Please note that the Groq API for LLaMa-3 has a daily limit for free usage. Once
 ## Video Example
 
 You can watch a video example of the chatbot in action
-https://github.com/Hypernap/legal-chatbot/assets/112685230/92916f65-0a8e-4402-918f-93d7fbf26a25
+<video src='https://github.com/Hypernap/legal-chatbot/assets/112685230/92916f65-0a8e-4402-918f-93d7fbf26a25' width=180/>
 
 
 
