@@ -51,7 +51,7 @@ body {
 }
 
 .message {
-  padding: 8px 12px;
+  padding: 20px;
   border-radius: 12px; /* Slightly rounder corners */
   max-width: 70%;
   line-height: 1.6; /* Increased line height for better readability */
