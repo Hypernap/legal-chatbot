@@ -18,15 +18,76 @@ const LegalChatbot = () => {
       const groq = new Groq({ dangerouslyAllowBrowser: true, apiKey: process.env.REACT_APP_GROQ });
       const response = await groq.chat.completions.create({
         messages: [
-          { role: "system", content: "You are an AI legal assistant, highly knowledgeable in Indian law and jurisprudence. Your role is to provide comprehensive support to lawyers by furnishing relevant statutory provisions, penal codes, case laws, and their judgments pertaining to the specific legal issues raised. Your responses should be structured, concise, and informative, catering to the needs of seasoned legal professionals. When a lawyer poses a query, analyze it thoroughly and provide the following: Identify and cite the applicable sections of relevant Indian laws, acts, and codes that govern the legal matter. Furnish a summary of recent landmark judgments from Indian courts that have set precedents or provided crucial interpretations related to the issue at hand. Highlight any notable dissenting opinions or contrasting viewpoints from respected legal scholars or judges, if relevant. Offer insightful analysis and commentary, drawing parallels with similar cases and their outcomes, to provide a well-rounded perspective. Maintain a respectful and professional tone befitting the solemnity of the legal profession. Your aim is to equip lawyers with comprehensive legal resources, enabling them to build robust cases and arguments. Ensure that your responses are well-researched, legally sound, and tailored to the specific context and jurisdiction of Indian law. ANSWER STRICTLY IN BRIEF POINTS" },
+          { role: "system", 
+            content: `
+            Role and Expertise:
+
+You are an elite AI legal assistant with unparalleled expertise in Indian law, encompassing both the traditional legal frameworks (e.g., Indian Penal Code (IPC)) and the new reforms introduced by the Bharatiya Nyaya Sanhita (BNS). Your role is to assist police officers by providing precise legal information relevant to specific scenarios they encounter.
+
+Guidelines for Responding to Queries:
+
+Relevant Legal Sections:
+
+Identify and cite the pertinent sections from both the IPC and the BNS that apply to the given scenario.
+Highlight key differences or similarities between the provisions in the IPC and the BNS.
+Past Jurisprudence:
+
+Provide brief summaries of relevant past cases related to the scenario.
+Include essential details for each case:
+Case Name (e.g., State of Kerala vs. XYZ)
+Year of Judgment
+Court (e.g., Supreme Court of India, High Court)
+Brief Overview of the Judgment focusing on how it relates to the scenario.
+Final Comment:
+
+Conclude with a concise, two-line comment that encapsulates the key takeaway or offers a succinct insight relevant to the scenario.
+Tone and Style Guidelines:
+
+Authoritative Yet Accessible Tone:
+
+Maintain professionalism while ensuring clarity and comprehensibility.
+Prioritize:
+
+Accuracy: Provide correct and up-to-date legal information.
+Relevance: Focus solely on information pertinent to the specific scenario.
+Brevity: Keep explanations concise without omitting crucial details.
+Response Formatting:
+
+Use Numbered Points to organize information effectively.
+Avoid Procedural Instructions or Commands; focus on delivering the requested legal information.
+Ensure Comprehensive Coverage while maintaining brevity.
+By adhering to these guidelines, you will provide police officers with the precise legal insights they need, helping them understand the relevant laws and past judicial decisions associated with their specific scenarios.
+
+Example Response Structure:
+
+Relevant Legal Sections:
+
+IPC Section X / BNS Section Y: Brief description of the section and its applicability.
+Comparison: Note any differences or similarities between the IPC and BNS provisions.
+Past Jurisprudence:
+
+Case 1:
+Case Name: State vs. ABC
+Year: 2018
+Court: Supreme Court of India
+Brief Overview: Summary of the judgment and its relevance.
+Case 2:
+[Repeat as necessary for relevant cases]
+Final Comment:
+
+Two-line conclusion providing key insight or a summarizing remark.
+
+ANSWER THE QUERY WITH PROPER MARKDOWN FORMATTING
+`
+            },
           { role: "user", content: userMessage }
         ],
-        model: "llama3-70b-8192"
+        model: "llama-3.1-70b-versatile"
       });
       return response.choices[0]?.message?.content || "";
     } catch (error) {
       console.error('Error:', error);
-      return '';
+      return 'Sorry, an error occurred while processing your request.';
     } finally {
       setLoading(false);
     }
@@ -39,9 +100,15 @@ const LegalChatbot = () => {
   const handleSendMessage = async () => {
     if (!inputValue.trim() || loading) return;
     setMessages(prevMessages => [...prevMessages, { sender: 'user', message: inputValue }]);
+    const userMessage = inputValue;
     setInputValue('');
-    const botMessage = await getGroqChatCompletion(inputValue); // Pass the user input message
+    const botMessage = await getGroqChatCompletion(userMessage);
     addBotMessage(botMessage);
+
+    // Scroll to the bottom after a new message is added
+    setTimeout(() => {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }, 100);
   };
 
   const handleInputChange = (e) => {
@@ -49,7 +116,8 @@ const LegalChatbot = () => {
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
       handleSendMessage();
     }
   };
@@ -58,10 +126,9 @@ const LegalChatbot = () => {
     const chatContainer = chatContainerRef.current;
     html2canvas(chatContainer).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF();
-      const imgProps = pdf.getImageProperties(imgData);
+      const pdf = new jsPDF('p', 'pt', 'a4');
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
       pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
       pdf.save('conversation.pdf');
     });
@@ -80,11 +147,11 @@ const LegalChatbot = () => {
   };
 
   return (
-    <div className="chatbot-container" ref={chatContainerRef}>
+    <div className="chatbot-container">
       <div className="chat-header">
         <h2>Legal Chatbot</h2>
       </div>
-      <div className="chat-body">
+      <div className="chat-body" ref={chatContainerRef}>
         <div className="chat-messages">
           {renderMessages()}
           {loading && (
@@ -93,26 +160,21 @@ const LegalChatbot = () => {
             </div>
           )}
         </div>
-        
       </div>
       <div className="chat-input">
-          <input
-            type="text"
-            placeholder="Type your message..."
-            value={inputValue}
-            onChange={handleInputChange}
-            onKeyDown={handleKeyDown}
-            disabled={loading}
-            className="input-field"
-          />
-          <button
-            className="send-btn"
-            onClick={handleSendMessage}
-            disabled={loading}
-          >
-            Send
-          </button>
-        </div>
+        <input
+          type="text"
+          placeholder="Type your message..."
+          value={inputValue}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          disabled={loading}
+          aria-label="Chat input"
+        />
+        <button className="send-btn" onClick={handleSendMessage} disabled={loading}>
+          Send
+        </button>
+      </div>
       <div className="chat-footer">
         <button onClick={handleClearChat}>Clear Chat</button>
         <button onClick={handleDownloadConversation}>Download Conversation</button>
