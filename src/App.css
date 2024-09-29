@@ -64,6 +64,10 @@ body {
   line-height: 1.6;
   word-wrap: break-word;
   font-size: 16px;
+  padding: 20px;
+  border-radius: 12px; /* Slightly rounder corners */
+  max-width: 70%;
+  line-height: 1.6; /* Increased line height for better readability */
 }
 
 .user {
