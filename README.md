@@ -1,4 +1,4 @@
-# Legal Chatbot with Groq API for LLaMa-3
+# Legal Chatbot with Groq API for LLaMa-3.3
 
 ## Overview
 
